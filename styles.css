@@ -1,0 +1,297 @@
+:root {
+  color-scheme: dark;
+  --night: #0b0a0e;
+  --goblin: #37be68;
+  --nightshade: #c84ce6;
+  --ivory: #f0e6cc;
+  --barrow: #3a1246;
+  --dusk: #2e1e38;
+  --bone: #c4b394;
+  --font-inscription: "IM Fell English SC", Georgia, serif;
+  --frame: clamp(1rem, 2.8vw, 2.75rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 20rem;
+  background: var(--night);
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--night);
+  color: var(--ivory);
+  font-family: var(--font-inscription);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  position: fixed;
+  z-index: 20;
+  inset: var(--frame);
+  border: 1px solid var(--dusk);
+  content: "";
+  pointer-events: none;
+}
+
+::selection {
+  background: var(--nightshade);
+  color: var(--night);
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 50%;
+  padding: 0.7rem 1rem;
+  transform: translate(-50%, -200%);
+  border: 1px solid var(--nightshade);
+  background: var(--night);
+  color: var(--ivory);
+  letter-spacing: 0.08em;
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
+.threshold {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(4rem, 10vh, 7rem) max(2.5rem, 7vw);
+}
+
+.identity {
+  width: min(100%, 72rem);
+  min-width: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.wordmark {
+  --mark: url("assets/bloodwrought-wordmark.png");
+  position: relative;
+  width: 100%;
+  margin: 0;
+  line-height: 0;
+  animation: wordmark-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.wordmark picture,
+.wordmark img,
+.wordmark__echo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wordmark img {
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark__echo {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  -webkit-mask: var(--mark) center / 100% 100% no-repeat;
+  mask: var(--mark) center / 100% 100% no-repeat;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wordmark__echo--violet {
+  transform: translateX(-3px);
+  background: var(--nightshade);
+  animation: tape-slip-violet 9s 2.4s steps(1, end) infinite;
+}
+
+.wordmark__echo--goblin {
+  transform: translateX(3px);
+  background: var(--goblin);
+  animation: tape-slip-goblin 9s 2.44s steps(1, end) infinite;
+}
+
+.sigil-rule {
+  width: min(31rem, 82vw);
+  margin: clamp(2rem, 4.25vh, 3rem) 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  animation: rise-in 700ms 350ms both;
+}
+
+.sigil-rule span {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--barrow));
+}
+
+.sigil-rule span:last-child {
+  transform: rotate(180deg);
+}
+
+.sigil-rule img {
+  width: 110px;
+  height: auto;
+  justify-self: center;
+  image-rendering: pixelated;
+}
+
+.gateways {
+  width: min(100%, 22rem);
+  border-top: 1px solid var(--dusk);
+  border-bottom: 1px solid var(--dusk);
+  animation: rise-in 700ms 500ms both;
+}
+
+.gateway {
+  position: relative;
+  min-height: 4.15rem;
+  padding: 1rem 1.2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  color: var(--ivory);
+  font-size: 0.85rem;
+  line-height: 1;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.gateway + .gateway {
+  border-top: 1px solid var(--dusk);
+}
+
+.gateway__label {
+  justify-self: start;
+}
+
+.gateway:hover,
+.gateway:focus-visible {
+  background: var(--nightshade);
+  color: var(--night);
+  outline: none;
+}
+
+.gateway:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ivory);
+}
+
+.gateway__mark {
+  font-family: Georgia, serif;
+  font-size: 1.1rem;
+}
+
+.contact {
+  margin: clamp(1.5rem, 3vh, 2.25rem) 0 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  animation: rise-in 700ms 650ms both;
+}
+
+.contact a {
+  color: var(--bone);
+  text-decoration: none;
+  border-bottom: 1px solid var(--barrow);
+  padding-bottom: 0.15em;
+}
+
+.contact a:hover,
+.contact a:focus-visible {
+  color: var(--nightshade);
+  border-bottom-color: var(--nightshade);
+  outline: none;
+}
+
+@keyframes wordmark-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tape-slip-violet {
+  0%, 91%, 94%, 100% { opacity: 0; clip-path: inset(0 0 100% 0); }
+  92% { opacity: 0.32; clip-path: inset(24% 0 58% 0); }
+  93% { opacity: 0.22; clip-path: inset(67% 0 21% 0); }
+}
+
+@keyframes tape-slip-goblin {
+  0%, 91.2%, 94.2%, 100% { opacity: 0; clip-path: inset(100% 0 0 0); }
+  92.2% { opacity: 0.25; clip-path: inset(25% 0 56% 0); }
+  93.2% { opacity: 0.2; clip-path: inset(69% 0 19% 0); }
+}
+
+@media (max-width: 37.5rem) {
+  .wordmark {
+    --mark: url("assets/bloodwrought-stacked.png");
+    width: min(100%, 22rem);
+  }
+}
+
+@media (max-width: 46rem) {
+  :root {
+    --frame: 0.8rem;
+  }
+
+  .threshold {
+    padding: 4rem 1.75rem;
+  }
+
+  .sigil-rule {
+    margin-block: 2rem;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .gateways {
+    border-block-color: CanvasText;
+  }
+}
